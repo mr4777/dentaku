@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css2?family=Train+One&display=swap");
+:root {
+  --bg-color: rgb(0, 0, 0);
+  --font-color-white: rgb(231, 231, 231);
+  --font-color-green: rgb(151, 255, 91);
+  --font-color-blue: rgb(81, 165, 255);
+  --font-color-red: rgb(255, 81, 81);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: large;
+  background-color: var(--bg-color);
+  color: var(--font-color-white);
+}
+
+a {
+  text-decoration: none;
+  background: transparent;
+  display: block;
+  font-size: inherit;
+}
+
+header {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 10vh;
+  margin-bottom: 2vh;
+  background: linear-gradient(90deg, #000000, #2d353f, #1f408d);
+}
+header .logo {
+  text-align: center;
+  flex-basis: 30vw;
+  background: transparent;
+  font-family: "Train One", cursive;
+  font-size: 3.2vw;
+}
+header .logo:hover {
+  cursor: pointer;
+}
+header .nav-list {
+  background: transparent;
+  flex-basis: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+header .nav-list .select {
+  border-bottom: solid 2px white;
+}
+header .nav-list .nav-list-item {
+  line-height: 10vh;
+  background: transparent;
+}
+header .nav-list .nav-list-item.login {
+  text-align: center;
+  width: 80px;
+  height: 40px;
+  line-height: 40px;
+  border: solid 0.1px white;
+  border-radius: 5px;
+}
+header .nav-list .nav-list-item:hover {
+  cursor: pointer;
+}
+
+.main-container {
+  height: 88vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+.main-container .btn-container .config input {
+  display: block;
+  width: 60px;
+  height: 35px;
+  border: solid 1px white;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.main-container .btn-container .config input:disabled {
+  border: solid 1px gray;
+}
+.main-container .btn-container .btn {
+  width: 100px;
+  height: 35px;
+  color: white;
+  border: solid 1px white;
+  border-radius: 2px;
+  display: block;
+  margin-top: 30px;
+}
+.main-container .btn-container .btn:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 5px white;
+}
+.main-container .btn-container .btn:disabled {
+  border: solid 1px gray;
+  pointer-events: none;
+}
+.main-container .display-container {
+  position: relative;
+}
+.main-container .display-container .display {
+  font-family: serif;
+  text-align: right;
+  letter-spacing: 1.5px;
+  width: 250px;
+}
+.main-container .display-container .input {
+  margin-top: 8px;
+  width: 250px;
+  font-family: inherit;
+  color: var(--font-color-blue);
+  text-align: right;
+  border: solid 0.1px white;
+  border-radius: 3px;
+  outline: none;
+}
+.main-container .display-container img {
+  width: 150px;
+  position: absolute;
+  top: 100%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+.main-container .log-container {
+  margin-top: 20px;
+}
+.main-container .log-container .title {
+  text-align: center;
+}
+.main-container .log-container .log {
+  width: 300px;
+  height: 420px;
+  padding: 6px;
+  border: solid 0.1px white;
+  border-radius: 3px;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+main {
+  width: 60vw;
+  color: var(--font-color-white);
+}
+main h1 {
+  font-size: 25px;
+}
+main p {
+  font-size: 20px;
+}
+main .right {
+  text-align: right;
+}
+
+.green {
+  color: var(--font-color-green);
+}
+
+.blue {
+  color: var(--font-color-blue);
+}
+
+.red {
+  color: var(--font-color-red);
+}

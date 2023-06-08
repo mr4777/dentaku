@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="電卓の練習サイトです。簿記検定や電卓技能検定試験の対策に使える計算問題をランダムに生成します。数字の桁数や丸めも指定することができます。もちろん完全無料。" name="description">
+  <title>電卓練習の道 | 電卓練習サイト</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><a href="index.html">電卓練習の道</a></div>
+    <div class="nav-list">
+      <div class="nav-list-item home select"><a href="index.html">Home</a></div>
+      <div class="nav-list-item ranking"><a href="ranking.html">Ranking</a></div>
+      <div class="nav-list-item about"><a href="about.html">About</a></div>
+      <div class="nav-list-item login">Login</div>
+    </div>
+  </header>
+  
+  <div class="main-container">
+    <div class="btn-container">
+      <div class="config">
+        項数
+        <input type="number" min="2" max="20" value="10" id="count">
+        桁数
+        <input type="number" max="10" value="6" id="digit">
+        丸め
+        <input type="number" min="0" value="2" id="round">
+      </div>
+      <button class="btn" id="start-button">開始</button>
+    </div>
+    
+    <div class="display-container">
+      <div class="display"></div>
+      <input type="text" class="input" disabled>
+    </div>
+    
+    <div class="log-container">
+      <div class="title">ログ</div>
+      <div class="log"></div>
+    </div>
+  </div>
+
+<script src="main.js"></script> 
+</body>
+</html>
