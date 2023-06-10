@@ -22,19 +22,27 @@
   <div class="main-container">
     <div class="btn-container">
       <div class="config">
-        項数
-        <input type="number" min="2" max="20" value="10" id="count">
-        桁数
-        <input type="number" max="10" value="6" id="digit">
-        丸め
-        <input type="number" min="0" value="2" id="round">
+        <div class="plus">↑</div>
+        <div class="minus">↓</div>
+        <div id="count-container">
+          <div>項数</div>
+          <div class="input" id="count"></div>
+        </div>
+        <div id="digit-container">
+          <div>桁数</div>
+          <div class="input" id="digit"></div>
+        </div>
+        <div id="round-container">
+          <div>丸め</div>
+          <div class="input" id="round"></div>
+        </div>
+        <button class="btn" id="start-button">開始</button>
       </div>
-      <button class="btn" id="start-button">開始</button>
     </div>
     
     <div class="display-container">
       <div class="display"></div>
-      <input type="text" class="input" disabled>
+      <input type="text" class="input input-number" disabled>
     </div>
     
     <div class="log-container">

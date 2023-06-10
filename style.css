@@ -88,42 +88,136 @@ header .nav-list .nav-list-item:hover {
   height: 88vh;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-around;
 }
-.main-container .btn-container {
-  margin-left: 30px;
-}
-.main-container .btn-container .config input {
-  display: block;
-  width: 60px;
-  height: 35px;
-  border: solid 1px white;
-  border-radius: 2px;
-  margin-bottom: 10px;
-}
-@media screen and (max-width: 370px) {
-  .main-container .btn-container .config input {
-    display: inline;
+@media screen and (min-width: 660px) {
+  .main-container {
+    align-items: center;
   }
 }
-.main-container .btn-container .config input:disabled {
+.main-container .btn-container {
+  user-select: none;
+}
+@media screen and (min-width: 370px) {
+  .main-container .btn-container {
+    margin-left: 30px;
+  }
+}
+.main-container .btn-container .config {
+  position: relative;
+}
+@media screen and (min-width: 370px) {
+  .main-container .btn-container .config {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(2, 50px);
+    grid-template-rows: repeat(4, 70px);
+  }
+}
+@media screen and (max-width: 369px) {
+  .main-container .btn-container .config {
+    display: flex;
+  }
+  .main-container .btn-container .config * {
+    margin: 0 4px;
+  }
+  .main-container .btn-container .config #start-button {
+    margin-top: 27px;
+  }
+  .main-container .btn-container .config .plus {
+    position: absolute;
+    top: 10px;
+  }
+  .main-container .btn-container .config .minus {
+    position: absolute;
+    top: 130px;
+  }
+}
+.main-container .btn-container .config .plus {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  font-size: 25px;
+  border: solid 1px white;
+  border-radius: 5px;
+  margin-top: 70px;
+  user-select: none;
+}
+.main-container .btn-container .config .plus.disabled {
+  border: solid 1px gray;
+  color: gray;
+  pointer-events: none;
+}
+.main-container .btn-container .config .minus {
+  grid-column: 2/3;
+  grid-row: 3/4;
+  font-size: 25px;
+  border: solid 1px white;
+  border-radius: 5px;
+  margin-bottom: 70px;
+  user-select: none;
+}
+.main-container .btn-container .config .minus.disabled {
+  border: solid 1px gray;
+  color: gray;
+  pointer-events: none;
+}
+.main-container .btn-container .config .plus:hover, .main-container .btn-container .config .minus:hover {
+  cursor: pointer;
+}
+.main-container .btn-container .config #count-container {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+.main-container .btn-container .config #digit-container {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.main-container .btn-container .config #round-container {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+.main-container .btn-container .config #start-button {
+  grid-column: 1/3;
+  grid-row: 4/5;
+}
+.main-container .btn-container .config .input {
+  display: block;
+  width: 45px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  border: solid 1px white;
+  border-radius: 2px;
+}
+.main-container .btn-container .config .input.selected {
+  background: #1f408d;
+}
+.main-container .btn-container .config .input.disabled {
+  border: solid 1px gray;
+  color: gray;
+  pointer-events: none;
+}
+.main-container .btn-container .config #count:hover, .main-container .btn-container .config #digit:hover, .main-container .btn-container .config #round:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 5px white;
+}
+.main-container .btn-container .config div:disabled {
   border: solid 1px gray;
 }
-.main-container .btn-container .btn {
+.main-container .btn-container .config .btn {
   width: 100px;
   height: 35px;
   color: white;
   border: solid 1px white;
   border-radius: 2px;
   display: block;
-  margin-top: 30px;
 }
-.main-container .btn-container .btn:hover {
+.main-container .btn-container .config .btn:hover {
   cursor: pointer;
   box-shadow: 0px 0px 5px white;
 }
-.main-container .btn-container .btn:disabled {
+.main-container .btn-container .config .btn:disabled {
   border: solid 1px gray;
   pointer-events: none;
 }
@@ -146,6 +240,10 @@ header .nav-list .nav-list-item:hover {
   border: solid 0.1px white;
   border-radius: 3px;
   outline: none;
+}
+.main-container .display-container .input.input:disabled {
+  -webkit-text-fill-color: var(--font-color-blue);
+  opacity: 1;
 }
 .main-container .display-container img {
   width: 150px;

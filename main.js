@@ -1,58 +1,102 @@
 const display = document.querySelector(".display");
 const startButton = document.querySelector("#start-button");
-const input = document.querySelector(".input");
+const input = document.querySelector(".input-number");
 const log = document.querySelector('.log');
 const inputCount = document.getElementById('count');
 const inputDigit = document.getElementById('digit');
 const inputRound = document.getElementById('round');
+const plusButton = document.querySelector('.plus');
+const minusButton = document.querySelector('.minus');
 
 const config = {
+  selected: '',
   count: 10,
   digit: 6,
-  round: 2
+  round: 3,
 }
+
+inputCount.textContent = config.count
+inputDigit.textContent = config.digit
+inputRound.textContent = config.round
 
 let startTime;
 let sum = 0;
+let playing = false;
 
 render(config.count, config.digit, config.round);
 
-inputCount.addEventListener('input', () => {
-  if (parseInt(inputCount.value) < 2) inputCount.value = 2;
-  else if (parseInt(inputCount.value) > 20) inputCount.value = 20;
-  else {
-    config.count = inputCount.value;
-    render(config.count, config.digit, config.round);
+plusButton.addEventListener('click', () => {
+  if (config.selected === 'count' && config.count < 20) {
+    config.count = config.count + 1;
+    inputCount.textContent = parseInt(inputCount.textContent) + 1;
+  } else if (config.selected === 'digit' && config.digit < 10) {
+    config.digit = config.digit + 1;
+    inputDigit.textContent = parseInt(inputDigit.textContent) + 1;
+  } else if (config.selected === 'round' && config.round < config.digit - 1) {
+    config.round = config.round + 1;
+    inputRound.textContent = parseInt(inputRound.textContent) + 1;
+  } else { return; }
+  render(config.count, config.digit, config.round);
+})
+
+minusButton.addEventListener('click', () => {
+  if (config.selected === 'count' && config.count > 2) {
+    config.count = config.count - 1;
+    inputCount.textContent = parseInt(inputCount.textContent) - 1;
+  } else if (config.selected === 'digit' && config.digit > config.round + 1) {
+    config.digit = config.digit - 1;
+    inputDigit.textContent = parseInt(inputDigit.textContent) - 1;
+  } else if (config.selected === 'round' && config.round > 0) {
+    config.round = config.round - 1;
+    inputRound.textContent = parseInt(inputRound.textContent) - 1;
+  } else { return; }
+  render(config.count, config.digit, config.round);
+})
+
+inputCount.addEventListener('click', () => {
+  inputCount.classList.toggle('selected');
+  inputDigit.classList.remove('selected');
+  inputRound.classList.remove('selected');
+  if (inputCount.classList.contains('selected')) {
+    config.selected = 'count';
+  } else {
+    config.selected = '';
   }
 })
 
-inputDigit.addEventListener('input', () => {
-  if (parseInt(inputDigit.value) <= config.round) inputDigit.value = parseInt(config.round) + 1;
-  else if (parseInt(inputDigit.value) > 10) inputDigit.value = 10;
-  else {
-    config.digit = inputDigit.value;
-    render(config.count, config.digit, config.round);
+inputDigit.addEventListener('click', () => {
+  inputCount.classList.remove('selected');
+  inputDigit.classList.toggle('selected');
+  inputRound.classList.remove('selected');
+  if (inputDigit.classList.contains('selected')) {
+    config.selected = 'digit';
+  } else {
+    config.selected = '';
   }
 })
 
-inputRound.addEventListener('input', () => {
-  if (parseInt(inputRound.value) < 0) inputRound.value = 0;
-  else if (parseInt(inputRound.value) >= config.digit) inputRound.value = parseInt(config.digit) - 1;
-  else {
-    config.round = inputRound.value;
-    render(config.count, config.digit, config.round);
+inputRound.addEventListener('click', () => {
+  inputCount.classList.remove('selected');
+  inputDigit.classList.remove('selected');
+  inputRound.classList.toggle('selected');
+  if (inputRound.classList.contains('selected')) {
+    config.selected = 'round';
+  } else {
+    config.selected = '';
   }
 })
-
 
 input.addEventListener('keypress', (e) => {
-  if (e.code === "Enter") {
+  if (e.code === "Enter" && playing === true) {
     if (input.value === '') return;
+
     const endTime = Date.now();
     const time = (endTime - startTime)/1000;
     const min = `${Math.floor(time/60)}`.padStart(2, '0');
     const sec = `${Math.floor(time%60)}`.padStart(2, '0');
+
     if (sum == Number(input.value.replace(/\D/g,''))) {
+      playing = false;
       addLog(`<div style="margin-bottom: 6px; text-indent: 1em">${min}:${sec} <span class="blue">正解</span>`);
       input.classList.add('green');
       input.disabled = true;
@@ -78,11 +122,23 @@ input.addEventListener('blur', () => {
 startButton.addEventListener('click', start)
 
 function start() {
+  playing = true;
+
   startTime = Date.now();
-  inputCount.disabled = !inputCount.disabled;
-  inputDigit.disabled = !inputDigit.disabled;
-  inputRound.disabled = !inputRound.disabled;
-  input.disabled = !input.disabled;
+
+  inputCount.classList.remove('selected');
+  inputDigit.classList.remove('selected');
+  inputRound.classList.remove('selected');
+
+  inputCount.classList.add('disabled');
+  inputDigit.classList.add('disabled');
+  inputRound.classList.add('disabled');
+
+  plusButton.classList.add('disabled');
+  minusButton.classList.add('disabled');
+
+  input.disabled = false;
+
   addLog(`<div>開始 <span style="font-size:15px">(項数:${config.count} 桁数:${config.digit} 丸め:${config.round})</span> </div>`);
   startButton.removeEventListener('click', start);
   startButton.textContent = '解答表示'
@@ -90,6 +146,8 @@ function start() {
 }
 
 function answer() {
+  playing = false;
+
   const endTime = Date.now();
   const time = (endTime - startTime)/1000;
   const min = `${Math.floor(time/60)}`.padStart(2, '0');
@@ -103,9 +161,14 @@ function answer() {
 
 function reset() {
   render(config.count, config.digit, config.round);
-  inputCount.disabled = !inputCount.disabled;
-  inputDigit.disabled = !inputDigit.disabled;
-  inputRound.disabled = !inputRound.disabled;
+
+  inputCount.classList.remove('disabled');
+  inputDigit.classList.remove('disabled');
+  inputRound.classList.remove('disabled');
+
+  plusButton.classList.remove('disabled');
+  minusButton.classList.remove('disabled');
+
   input.value = '';
   startButton.removeEventListener('click', reset);
   startButton.textContent = '開始'
@@ -135,5 +198,3 @@ function render(count, digit, round) {
     else display.insertAdjacentHTML('afterbegin', `<div>${num.toLocaleString()}</div>`);;
   }
 }
-
-
