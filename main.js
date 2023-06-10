@@ -84,7 +84,6 @@ function start() {
   inputRound.disabled = !inputRound.disabled;
   input.disabled = !input.disabled;
   addLog(`<div>開始 <span style="font-size:15px">(項数:${config.count} 桁数:${config.digit} 丸め:${config.round})</span> </div>`);
-  input.focus();
   startButton.removeEventListener('click', start);
   startButton.textContent = '解答表示'
   startButton.addEventListener('click', answer);

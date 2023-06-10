@@ -32,12 +32,23 @@ header {
   margin-bottom: 2vh;
   background: linear-gradient(90deg, #000000, #2d353f, #1f408d);
 }
+@media screen and (max-width: 420px) {
+  header {
+    justify-content: space-between;
+  }
+}
 header .logo {
   text-align: center;
   flex-basis: 30vw;
   background: transparent;
   font-family: "Train One", cursive;
   font-size: 3.2vw;
+}
+@media screen and (max-width: 420px) {
+  header .logo {
+    font-size: 7vw;
+    flex-basis: 70vw;
+  }
 }
 header .logo:hover {
   cursor: pointer;
@@ -51,6 +62,11 @@ header .nav-list {
 }
 header .nav-list .select {
   border-bottom: solid 2px white;
+}
+@media screen and (max-width: 420px) {
+  .nav-list-item:not(header .nav-list .login) {
+    display: none;
+  }
 }
 header .nav-list .nav-list-item {
   line-height: 10vh;
@@ -75,6 +91,9 @@ header .nav-list .nav-list-item:hover {
   align-items: center;
   justify-content: space-around;
 }
+.main-container .btn-container {
+  margin-left: 30px;
+}
 .main-container .btn-container .config input {
   display: block;
   width: 60px;
@@ -82,6 +101,11 @@ header .nav-list .nav-list-item:hover {
   border: solid 1px white;
   border-radius: 2px;
   margin-bottom: 10px;
+}
+@media screen and (max-width: 370px) {
+  .main-container .btn-container .config input {
+    display: inline;
+  }
 }
 .main-container .btn-container .config input:disabled {
   border: solid 1px gray;
@@ -104,17 +128,18 @@ header .nav-list .nav-list-item:hover {
   pointer-events: none;
 }
 .main-container .display-container {
+  margin: 20px 30px;
+  width: 180px;
   position: relative;
 }
 .main-container .display-container .display {
   font-family: serif;
   text-align: right;
   letter-spacing: 1.5px;
-  width: 250px;
 }
 .main-container .display-container .input {
+  width: 180px;
   margin-top: 8px;
-  width: 250px;
   font-family: inherit;
   color: var(--font-color-blue);
   text-align: right;
@@ -131,16 +156,16 @@ header .nav-list .nav-list-item:hover {
   mix-blend-mode: difference;
 }
 .main-container .log-container {
-  margin-top: 20px;
+  margin: 20px 30px 0px 0px;
 }
 .main-container .log-container .title {
   text-align: center;
 }
 .main-container .log-container .log {
-  width: 300px;
+  width: 260px;
   height: 420px;
   padding: 6px;
-  border: solid 0.1px white;
+  border: solid 1px white;
   border-radius: 3px;
   overflow: auto;
   white-space: nowrap;
