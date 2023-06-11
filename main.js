@@ -1,12 +1,14 @@
 const display = document.querySelector(".display");
 const startButton = document.querySelector("#start-button");
-const input = document.getElementById("input-number");
+const input = document.getElementById('input-number');
 const log = document.querySelector('.log');
 const inputCount = document.getElementById('count');
 const inputDigit = document.getElementById('digit');
 const inputRound = document.getElementById('round');
 const plusButton = document.querySelector('.plus');
 const minusButton = document.querySelector('.minus');
+
+input.disabled = true;
 
 const config = {
   selected: '',
@@ -22,6 +24,7 @@ inputRound.textContent = config.round
 let startTime;
 let sum = 0;
 let playing = false;
+let maru;
 
 render(config.count, config.digit, config.round);
 
@@ -103,7 +106,8 @@ input.addEventListener('keypress', (e) => {
       startButton.removeEventListener('click', answer);
       startButton.textContent = '再挑戦'
       startButton.addEventListener('click', reset);
-      display.insertAdjacentHTML('beforebegin', `<img src="maru.gif?${new Date().getTime()}" class="maru">`)
+      display.insertAdjacentHTML('beforebegin', `<img src="maru.gif?${new Date().getTime()}" class="maru">`);
+      maru = document.querySelector('.maru');
     } else {
       let value = parseInt(input.value.replace(/\D/g,'')).toLocaleString();
       addLog(`<div style="text-indent: 1em">${min}:${sec} <span class="red">${value}</span></div>`);
@@ -176,7 +180,7 @@ function reset() {
   startButton.removeEventListener('click', reset);
   startButton.textContent = '開始'
   startButton.addEventListener('click', start);
-  document.querySelector('.maru').remove();
+  if (maru) maru.remove();
 }
 
 function addLog(content) {
