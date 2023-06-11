@@ -235,6 +235,7 @@ header .nav-list .nav-list-item:hover {
   color: gray;
 }
 .main-container .display-container .input {
+  letter-spacing: 1.5px;
   width: 180px;
   margin-top: 8px;
   font-family: inherit;
