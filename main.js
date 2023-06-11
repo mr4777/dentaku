@@ -116,6 +116,7 @@ input.addEventListener('keypress', (e) => {
       startButton.addEventListener('click', reset);
       display.insertAdjacentHTML('beforebegin', `<img src="maru.gif?${new Date().getTime()}" class="maru">`);
       maru = document.querySelector('.maru');
+      input.blur();
     } else {
       addLog(`<div style="text-indent: 1em">${min}:${sec} <span class="red">${value.toLocaleString()}</span></div>`);
       input.value = '';
