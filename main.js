@@ -1,6 +1,6 @@
 const display = document.querySelector(".display");
 const startButton = document.querySelector("#start-button");
-const input = document.querySelector(".input-number");
+const input = document.getElementById("input-number");
 const log = document.querySelector('.log');
 const inputCount = document.getElementById('count');
 const inputDigit = document.getElementById('digit');
@@ -122,6 +122,9 @@ input.addEventListener('blur', () => {
 startButton.addEventListener('click', start)
 
 function start() {
+
+  render(config.count, config.digit, config.round);
+
   playing = true;
 
   startTime = Date.now();
