@@ -137,6 +137,8 @@ function start() {
   inputDigit.classList.remove('selected');
   inputRound.classList.remove('selected');
 
+  config.selected = '';
+
   inputCount.classList.add('disabled');
   inputDigit.classList.add('disabled');
   inputRound.classList.add('disabled');
