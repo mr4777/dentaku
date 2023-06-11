@@ -60,7 +60,7 @@ header .nav-list {
   align-items: center;
   justify-content: space-around;
 }
-header .nav-list .select {
+header .nav-list .selected {
   border-bottom: solid 2px white;
 }
 @media screen and (max-width: 420px) {
@@ -230,6 +230,9 @@ header .nav-list .nav-list-item:hover {
   font-family: serif;
   text-align: right;
   letter-spacing: 1.5px;
+}
+.main-container .display-container .display .disabled {
+  color: gray;
 }
 .main-container .display-container .input {
   width: 180px;

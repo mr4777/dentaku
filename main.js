@@ -98,7 +98,15 @@ input.addEventListener('keypress', (e) => {
     const min = `${Math.floor(time/60)}`.padStart(2, '0');
     const sec = `${Math.floor(time%60)}`.padStart(2, '0');
 
-    if (sum == Number(input.value.replace(/\D/g,''))) {
+    let value;
+
+    if ((/^[+,-]?([1-9]\d*|0)$/g).test(input.value)) {
+      value = parseInt(input.value);
+    } else {
+      value = '無効な値を入力'
+    }
+
+    if (sum === value) {
       playing = false;
       addLog(`<div style="margin-bottom: 6px; text-indent: 1em">${min}:${sec} <span class="blue">正解</span>`);
       input.classList.add('green');
@@ -109,25 +117,25 @@ input.addEventListener('keypress', (e) => {
       display.insertAdjacentHTML('beforebegin', `<img src="maru.gif?${new Date().getTime()}" class="maru">`);
       maru = document.querySelector('.maru');
     } else {
-      let value = parseInt(input.value.replace(/\D/g,'')).toLocaleString();
-      addLog(`<div style="text-indent: 1em">${min}:${sec} <span class="red">${value}</span></div>`);
+      addLog(`<div style="text-indent: 1em">${min}:${sec} <span class="red">${value.toLocaleString()}</span></div>`);
       input.value = '';
     }
+    logScrollToBottom();
   }
 })
 
 input.addEventListener('blur', () => {
-  let inputNumber = input.value;
-  if (inputNumber === '') return;
-  inputNumber = parseInt(input.value.replace(/\D/g,''));
-  input.value = inputNumber.toLocaleString()
+  if (!((/^[+,-]?([1-9]\d*|0)$/g).test(input.value))) return;
+  input.value = parseInt(input.value).toLocaleString();
 })
 
 startButton.addEventListener('click', start)
 
 function start() {
-
   render(config.count, config.digit, config.round);
+  document.querySelectorAll('.number').forEach((el) => {
+    el.classList.remove('disabled');
+  })
 
   playing = true;
 
@@ -148,10 +156,12 @@ function start() {
 
   input.disabled = false;
 
-  addLog(`<div>開始 <span style="font-size:15px">(項数:${config.count} 桁数:${config.digit} 丸め:${config.round})</span> </div>`);
+  addLog(`<div>開始 <span style="font-size:15px">(項数:${config.count} 桁数:${config.digit} 丸め:${config.round})</span></div>`);
   startButton.removeEventListener('click', start);
   startButton.textContent = '解答表示'
   startButton.addEventListener('click', answer);
+
+  logScrollToBottom();
 }
 
 function answer() {
@@ -166,6 +176,8 @@ function answer() {
   startButton.removeEventListener('click', answer);
   startButton.textContent = '再挑戦'
   startButton.addEventListener('click', reset);
+
+  logScrollToBottom();
 }
 
 function reset() {
@@ -198,12 +210,17 @@ function render(count, digit, round) {
     sum += num;
     if(i === 0) {
       display.insertAdjacentHTML('afterbegin', `
-        <div style="border-bottom: solid .1px white; padding-bottom: 3px;">
+        <div class="number disabled" style="border-bottom: solid .1px white; padding-bottom: 3px;">
           <span style="float:left">+</span>
           ${num.toLocaleString()}
         </div>`
       );
     }
-    else display.insertAdjacentHTML('afterbegin', `<div>${num.toLocaleString()}</div>`);;
+    else display.insertAdjacentHTML('afterbegin', `<div class="number disabled">${num.toLocaleString()}</div>`);;
   }
+}
+
+function logScrollToBottom() {
+  let log = document.querySelector('.log');
+  log.scrollTo(0, log.scrollHeight);
 }
